@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        include partials/header
+    body.login
+        .contenedor-formulario
+            h1 #{nombrePagina}
+            p Agrega tu e-mail para restablecer la contraseña
+
+            if (locals.mensajes)
+                each categoria in Object.keys(locals.mensajes)
+                    each mensaje in mensajes[categoria]
+                        .alerta(class=`${categoria}`)
+                            p= mensaje
+
+            form.caja-login(action='/restablecer' method="POST")
+                .campo
+                    label(for="email") E-mail:
+                    input(type="email", name="email" placeholder="Tu Email")
+                .campo.enviar
+                    input.boton(type="submit", value="Resetear Password")
+                .campo.acciones
+                    a(href="/iniciar-sesion") Ya lo recordé, volver al Login
